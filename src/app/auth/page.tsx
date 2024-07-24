@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import Input from "../formInput";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import styles from "./LoanForm.module.css";
+import styles from "./LogInForm.module.css";
+import Input from "@/components/formInput/page";
 
 // validation schema
 const validationSchema = Yup.object({
@@ -30,6 +30,7 @@ const initialValues = {
 const LoanForm = () => {
   const onSubmit = (values) => {
     const { email, password } = values;
+    console.log(values);
   };
   const formik = useFormik({
     initialValues,
@@ -47,7 +48,11 @@ const LoanForm = () => {
         <Input name="dateOfBirth" formik={formik} label="تاریخ تولد" />
         <Input name="phoneNumber" formik={formik} label="شماره تماس" />
 
-        <button type="submit" className={`btn--primary ${styles.btn}`}>
+        <button
+          type="submit"
+          disabled={!formik.isValid}
+          className={`btn--primary ${styles.btn}`}
+        >
           ثبت
         </button>
       </form>

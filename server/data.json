@@ -2,6 +2,7 @@
   "data": [
     {
       "id": "1",
+      "cover": "https://blubank.sb24.ir/vam/assets/img/emdad.png",
       "createdDate": "2024-04-28T11:57:17.315Z",
       "name": "وام ازدواج",
       "repaymentType": [
@@ -16,6 +17,7 @@
     },
     {
       "id": "4",
+      "cover": "https://blubank.sb24.ir/vam/assets/img/child.png",
       "createdDate": "2021-12-10T08:15:00.987Z",
       "name": "وام تحصیلی",
       "repaymentType": [
@@ -30,6 +32,7 @@
     },
     {
       "id": "5",
+      "cover": "https://blubank.sb24.ir/vam/assets/img/home-2.png",
       "createdDate": "2020-08-05T16:20:30.456Z",
       "name": "وام تجاری",
       "repaymentType": [
@@ -44,6 +47,7 @@
     },
     {
       "id": "6",
+      "cover": "https://blubank.sb24.ir/vam/assets/img/behzisti.png",
       "createdDate": "2019-04-15T10:10:10.789Z",
       "name": "وام شخصی",
       "repaymentType": [
@@ -70,6 +74,7 @@
     },
     {
       "id": "7",
+      "cover": "https://blubank.sb24.ir/vam/assets/img/marid.png",
       "createdDate": "2018-02-20T14:25:45.321Z",
       "name": "وام خرید خودرو",
       "repaymentType": [
@@ -88,6 +93,7 @@
     },
     {
       "id": "8",
+      "cover": "https://blubank.sb24.ir/vam/assets/img/emdad.png",
       "createdDate": "2017-11-30T09:40:20.654Z",
       "name": "وام تعمیرات منزل",
       "repaymentType": [

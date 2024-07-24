@@ -1,0 +1,93 @@
+/* Swiper Slider */
+.swiper-button-prev,
+.swiper-button-next {
+  margin: 0px !important;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  width: 40px !important;
+  height: 40px !important;
+}
+.swiper-button-next {
+  border-radius: 10px 0px 0px 10px !important;
+}
+.swiper-button-prev {
+  border-radius: 0px 10px 10px 0 !important;
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 26px !important;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  display: none !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+.swiper-slide img {
+  display: block;
+  /* width: 100%;
+  height: 100%; */
+  object-fit: cover;
+}
+.swiper {
+  width: 70%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 16px !important;
+}
+.swiper-pagination-bullet {
+  border: 2px solid rgb(var(--color-primary-800)) !important;
+  opacity: 1 !important;
+  background-color: transparent !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+.swiper-pagination-bullet-active {
+  width: 17px !important;
+  border-radius: 5px !important;
+  background-color: rgb(var(--color-primary-800)) !important;
+}
+
+.swiper:hover .swiper-button-prev,
+.swiper:hover .swiper-button-next {
+  display: flex !important;
+}
+
+.sliderWrapper {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-items: center;
+}
+.sliderWrapper img {
+  justify-items: center;
+  grid-column: span 2 / span 2;
+  max-width: 300px;
+}
+.sliderWrapper div {
+  grid-column: span 2 / span 2;
+}
+.loam-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem 0;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+.loam-wrapper h3 {
+  font-size: 22px !important;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: rgb(var(--color-primary-800)) !important;
+}
+
+@media (min-width: 967px) {
+  .sliderWrapper img {
+    grid-column: span 1 / span 1;
+  }
+  .sliderWrapper div {
+    grid-column: span 1 / span 1;
+  }
+}

@@ -32,11 +32,11 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body className={vazirsans.className}>
-        <div className="container">
+        <div className="wrapper">
           <Header />
           {children}
+          <Footer />
         </div>
-        <Footer />
       </body>
     </html>
   );

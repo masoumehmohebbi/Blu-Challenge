@@ -5,18 +5,18 @@ import Image from "next/image";
 
 const Header = () => {
   return (
-    <div className={styles.header}>
-      <Link href="" className="btn--primary">
+    <div className={`container ${styles.header}`}>
+      <Link href="/auth" className="btn--primary">
         ورود به سامانه
       </Link>
 
       {/* menu items */}
       <ul className={styles.menu}>
         <li>
-          <Link href="">انواع وام</Link>
+          <Link href="">صفحه اصلی</Link>
         </li>
         <li>
-          <Link href="">چگونه وام بگیریم</Link>
+          <Link href="">انواع وام</Link>
         </li>
         <li>
           <Link href="">درباره ما</Link>
