@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/common/header/Header";
-import Footer from "@/common/Footer";
+import Footer from "@/common/footer/Footer";
 import localFont from "next/font/local";
 
 const vazirsans = localFont({
@@ -33,8 +32,10 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body className={vazirsans.className}>
-        <Header />
-        {children}
+        <div className="container">
+          <Header />
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

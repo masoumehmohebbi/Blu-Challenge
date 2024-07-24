@@ -1,0 +1,32 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+.error {
+  margin-left: 0.5rem;
+  flex: 1 1 0%;
+  font-size: 0.75rem;
+  text-align: left;
+  color: rgb(var(--color-red-500));
+}
+.input {
+  padding: 0.9rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(var(--color-secondary-200));
+  outline-style: none;
+  width: 100%;
+  font-size: 0.875rem;
+  text-align: left;
+  transition: all 1s leaner;
+  background: rgb(var(--color-secondary-200));
+}
+.input:hover {
+  border: 1px solid rgb(var(--color-primary-400));
+}
+.input:focus {
+  border: 1px solid rgb(var(--color-primary-400));
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}

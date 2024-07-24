@@ -6,20 +6,25 @@ import Image from "next/image";
 const Header = () => {
   return (
     <div className={styles.header}>
+      <Link href="" className="btn--primary">
+        ورود به سامانه
+      </Link>
+
+      {/* menu items */}
       <ul className={styles.menu}>
         <li>
           <Link href="">انواع وام</Link>
         </li>
         <li>
-          <Link href="">درباره ما</Link>
+          <Link href="">چگونه وام بگیریم</Link>
         </li>
         <li>
-          <Link href="">ورود به سامانه</Link>
+          <Link href="">درباره ما</Link>
         </li>
       </ul>
-
+      {/* menu logo */}
       <div>
-        <Image src="/blu.svg" width={100} height={100} alt="blue-logo" />
+        <Image src="/blu.svg" width={120} height={120} alt="blue-logo" />
       </div>
     </div>
   );

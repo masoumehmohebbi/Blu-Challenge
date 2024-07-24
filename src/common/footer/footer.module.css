@@ -1,0 +1,21 @@
+.main {
+  background: rgb(var(--color-secondary-200));
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  padding: 0.9rem 0;
+}
+
+.content {
+  display: flex;
+  column-gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.link {
+  background-color: rgb(var(--color-primary-400));
+  padding: 0.2rem 1rem;
+  border-radius: 2rem;
+}
+.link:hover {
+  background-color: rgb(var(--color-primary-500));
+}
