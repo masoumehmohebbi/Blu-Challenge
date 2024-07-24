@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: red;
+  padding: 0px 16px;
+}
+.menu {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  gap: 0px 8px;
+}
