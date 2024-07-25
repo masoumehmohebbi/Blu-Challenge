@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import styles from "./LoanTypesForm.module.css";
 import {
   ArrowRightIcon,
+  CalculatorIcon,
   CurrencyDollarIcon,
   ExclamationTriangleIcon,
 } from "@heroicons/react/24/outline";
@@ -97,32 +98,6 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
           selectOptions={selectedRepayment}
         />
 
-        <div>
-          <button onClick={calcHandler} className={styles.calcBtn}>
-            محاسبه کن
-          </button>
-
-          <div className="flexRow">
-            <div className={styles.iconWrapper}>
-              <ExclamationTriangleIcon
-                style={{ color: "rgb(var(--color-red-500))" }}
-                className={styles.icon}
-              />
-              <h4>جریمه دیرکرد: </h4>
-            </div>
-            <span>0</span>
-          </div>
-          <div className="flexRow">
-            <div className={styles.iconWrapper}>
-              <CurrencyDollarIcon
-                style={{ color: "rgb(var(--color-success))" }}
-                className={styles.icon}
-              />
-              <h4>قسط تسهیلات: </h4>
-            </div>
-            <span>0</span>
-          </div>
-        </div>
         <button
           disabled={!formik.isValid}
           className={`btn--primary ${styles.btn}`}
@@ -131,6 +106,37 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
           ثبت
         </button>
       </form>
+      <br />
+      <div className={styles.box}>
+        <button
+          onClick={calcHandler}
+          className={`${styles.calcBtn} ${styles.iconWrapper}`}
+        >
+          <CalculatorIcon className={styles.icon} />
+          محاسبه کن
+        </button>
+
+        <div className="flexRow">
+          <div className={styles.iconWrapper}>
+            <ExclamationTriangleIcon
+              style={{ color: "rgb(var(--color-red-500))" }}
+              className={styles.icon}
+            />
+            <h4>جریمه دیرکرد: </h4>
+          </div>
+          <span>0</span>
+        </div>
+        <div className="flexRow">
+          <div className={styles.iconWrapper}>
+            <CurrencyDollarIcon
+              style={{ color: "rgb(var(--color-success))" }}
+              className={styles.icon}
+            />
+            <h4>قسط تسهیلات: </h4>
+          </div>
+          <span>0</span>
+        </div>
+      </div>
     </div>
   );
 };
