@@ -12,6 +12,7 @@ import {
 import Select from "../formSelect/page";
 import loans from "../../../server/data.json";
 import toast from "react-hot-toast";
+import toPersianDigits from "@/utils/toPersianDigits";
 
 // validation schema
 const validationSchema = Yup.object({
@@ -28,6 +29,9 @@ const initialValues = {
 const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
   const selectOptions = loans.data;
   const [selectedRepayment, setSelectedRepayment] = useState([]);
+  const [calcPenalty, setCalcPenalty] = useState(0);
+  const [calcPayment, setCalcPayment] = useState(0);
+  const [loanCost, setLoanCost] = useState(null);
 
   const onSubmit = (values) => {
     updateFormData(values);
@@ -58,14 +62,32 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
           return { name: r.name, value: r.value };
         })
       );
-      return;
+    }
+
+    if (e.target.name === "loanRepayment") {
+      console.log(e.target.value);
+
+      setLoanCost(e.target.value);
     }
   };
   const calcHandler = () => {
     const selectedLoan = selectOptions.find(
       (loan) => loan.name === formik.values.loanType
     );
-    if (!selectedLoan) return;
+
+    if (!selectedLoan) {
+      return toast.error("ابتدا فیلدهای بالا رو انتخاب کنید");
+    }
+
+    //Calc Penalty
+    const { penaltyRate, amount, interestRate } = selectedLoan;
+    setCalcPenalty(penaltyRate * amount);
+
+    // Calc payment
+    const selectedLoanCost = parseInt(loanCost.match(/\d+/g));
+    setCalcPayment(
+      ((amount + amount * interestRate) / selectedLoanCost).toFixed(0)
+    );
   };
 
   return (
@@ -124,7 +146,7 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
             />
             <h4>جریمه دیرکرد: </h4>
           </div>
-          <span>0</span>
+          <span>{toPersianDigits(calcPenalty)} ریال </span>
         </div>
         <div className="flexRow">
           <div className={styles.iconWrapper}>
@@ -134,7 +156,7 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
             />
             <h4>قسط تسهیلات: </h4>
           </div>
-          <span>0</span>
+          <span>{toPersianDigits(calcPayment)} ریال </span>
         </div>
       </div>
     </div>

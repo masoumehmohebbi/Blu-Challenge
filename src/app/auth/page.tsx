@@ -5,12 +5,13 @@ import LogInForm from "@/components/loginForm/LogInForm";
 import React, { useState } from "react";
 
 const StepForm = () => {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({});
 
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
 
+  // Persisting data
   const updateFormData = (newData: any) => {
     setFormData((prev) => ({ ...prev, ...newData }));
   };
