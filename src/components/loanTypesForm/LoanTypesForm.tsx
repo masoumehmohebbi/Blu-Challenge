@@ -23,7 +23,12 @@ const initialValues = {
   loanRepayment: "",
 };
 
-const LoanTypesForm = ({ prevStep, formData }) => {
+const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
+  const [calculatedValues, setCalculatedValues] = useState({
+    penalty: 0,
+    installment: 0,
+  });
+
   const selectOptions = loans.data;
 
   // const [selectedLoan, setSelectedLoan] = useState(loans.data[0]);
@@ -35,7 +40,11 @@ const LoanTypesForm = ({ prevStep, formData }) => {
   ]);
 
   const onSubmit = (values) => {
-    console.log("form Data", values, formData);
+    console.log(values);
+
+    updateFormData(values);
+    console.log("all form Data =>", formData);
+    localStorage.setItem("user", JSON.stringify(formData));
   };
   const formik = useFormik({
     initialValues,
@@ -54,7 +63,28 @@ const LoanTypesForm = ({ prevStep, formData }) => {
           return { name: r.name, value: r.value };
         })
       );
+      return;
     }
+  };
+  const calcHandler = () => {
+    const selectedLoan = selectOptions.find(
+      (loan) => loan.name === formik.values.loanType
+    );
+    if (!selectedLoan) return;
+
+    const loanAmount = formData.amount; // مقدار وام از داده‌های فرم
+    const penaltyRate = selectedLoan.penaltyRate;
+    const interestRate = selectedLoan.interestRate;
+    const repaymentMonths = formik.values.loanRepayment;
+
+    const penalty = calculatePenalty(loanAmount, penaltyRate);
+    const installment = calculateInstallment(
+      loanAmount,
+      interestRate,
+      repaymentMonths
+    );
+
+    setCalculatedValues({ penalty, installment });
   };
 
   return (
@@ -88,7 +118,9 @@ const LoanTypesForm = ({ prevStep, formData }) => {
         />
 
         <div>
-          <button className={styles.calcBtn}>محاسبه کن</button>
+          <button onClick={calcHandler} className={styles.calcBtn}>
+            محاسبه کن
+          </button>
 
           <div className="flexRow">
             <div className={styles.iconWrapper}>
@@ -98,7 +130,7 @@ const LoanTypesForm = ({ prevStep, formData }) => {
               />
               <h4>جریمه دیرکرد: </h4>
             </div>
-            <span>123</span>
+            <span>{calculatedValues.penalty}</span>
           </div>
           <div className="flexRow">
             <div className={styles.iconWrapper}>
@@ -106,9 +138,9 @@ const LoanTypesForm = ({ prevStep, formData }) => {
                 style={{ color: "rgb(var(--color-success))" }}
                 className={styles.icon}
               />
-              <h4>قسط تسهیالت: </h4>
+              <h4>قسط تسهیلات: </h4>
             </div>
-            <span>456</span>
+            <span>{calculatedValues.installment}</span>
           </div>
         </div>
         <button
@@ -124,3 +156,12 @@ const LoanTypesForm = ({ prevStep, formData }) => {
 };
 
 export default LoanTypesForm;
+
+const calculatePenalty = (loanAmount, penaltyRate) => {
+  return loanAmount * (penaltyRate / 100);
+};
+
+const calculateInstallment = (loanAmount, interestRate, repaymentMonths) => {
+  const totalAmount = loanAmount + loanAmount * (interestRate / 100);
+  return totalAmount / repaymentMonths;
+};

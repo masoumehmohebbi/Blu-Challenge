@@ -56,7 +56,7 @@ const Slider = () => {
                 </div>
                 <div>
                   <span>نرخ بهره:</span>
-                  <span>{item.percentageRate}</span>
+                  <span>{item.interestRate}</span>
                 </div>
                 <div>
                   <span>نرخ جریمه:</span>

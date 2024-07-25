@@ -33,8 +33,6 @@ const initialValues = {
 };
 const LogInForm = ({ nextStep, updateFormData }) => {
   const onSubmit = (values) => {
-    const { email, password } = values;
-    console.log(values);
     updateFormData(values);
     nextStep();
   };

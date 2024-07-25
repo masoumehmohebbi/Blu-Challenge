@@ -1,4 +1,5 @@
 :root {
+  font-family: "Vazir";
   --background-app-rgb: 255, 255, 255;
   --color-primary-900: 74, 109, 255;
   --color-primary-800: 92, 124, 255;
@@ -74,6 +75,11 @@ button:disabled {
   pointer-events: none;
   box-shadow: none;
   cursor: not-allowed;
+}
+
+button {
+  background-color: transparent;
+  cursor: pointer;
 }
 
 /* Wrapper */

@@ -27,7 +27,13 @@ const StepForm = () => {
         />
       );
     case 3:
-      return <LoanTypesForm prevStep={prevStep} formData={formData} />;
+      return (
+        <LoanTypesForm
+          prevStep={prevStep}
+          formData={formData}
+          updateFormData={updateFormData}
+        />
+      );
 
     default:
       return null;
