@@ -55,9 +55,14 @@
   padding-top: 1.5rem;
   text-align: center;
 }
+.tabelContainer {
+  max-width: 35rem;
+  overflow-x: auto;
+}
 
 @media (min-width: 768px) {
   .modal {
     max-width: 30rem;
+    max-width: fit-content;
   }
 }

@@ -1,0 +1,4 @@
+.tabel {
+  overflow-x: auto;
+  background-color: rgb(var(--color-secondary-0));
+}

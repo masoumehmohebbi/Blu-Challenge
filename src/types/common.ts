@@ -1,3 +1,9 @@
+import React from "react";
+
+export type ChildrenProp = {
+  children: React.ReactNode;
+};
+
 export type FormValues = {
   name: string;
   email: string;

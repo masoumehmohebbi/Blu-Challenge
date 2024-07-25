@@ -40,11 +40,12 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
   ]);
 
   const onSubmit = (values) => {
-    console.log(values);
-
     updateFormData(values);
-    console.log("all form Data =>", formData);
-    localStorage.setItem("user", JSON.stringify(formData));
+
+    let existingData = localStorage.getItem("user");
+    let dataArray = existingData ? JSON.parse(existingData) : [];
+    dataArray.push(formData);
+    localStorage.setItem("user", JSON.stringify(dataArray));
   };
   const formik = useFormik({
     initialValues,

@@ -1,13 +1,14 @@
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import styles from "./modal.module.css";
-import toLocalDate from "utils/toLocalDate";
+import Table from "../tabel/Tabel";
+import toLocalDate from "@/utils/toLocalDate";
 
 function Modal({ onOpen, open }) {
-  const userLoanLists = JSON.parse(localStorage.getItem("user"));
-
-  if (userLoanLists) {
-    console.log(userLoanLists);
+  let userLoanLists = null;
+  if (typeof window !== "undefined") {
+    userLoanLists = JSON.parse(localStorage.getItem("user"));
   }
+
   if (!open) return null;
   return (
     <div>
@@ -19,10 +20,12 @@ function Modal({ onOpen, open }) {
             <XCircleIcon className={`${styles.close} ${styles.icon}`} />
           </button>
         </div>
-        {!userLoanLists && (
+        {!userLoanLists ? (
           <div className={styles.text}>هنوز هیج تسهیلاتی ثبت نکردید.</div>
+        ) : (
+          <UserLoanListsComponent data={userLoanLists} />
         )}
-        {userLoanLists && <UserLoanLists data={userLoanLists} />}
+        {/* {userLoanLists && <p>yes</p>} */}
       </div>
     </div>
   );
@@ -30,21 +33,33 @@ function Modal({ onOpen, open }) {
 
 export default Modal;
 
-const UserLoanLists = ({ data }) => {
-  const {
-    firstName,
-    lastName,
-    birthDate,
-    loanType,
-    phoneNumber,
-    nationalCode,
-    loanRepayment,
-    annualBalance,
-  } = data;
+const UserLoanListsComponent = ({ data }) => {
   return (
-    <div>
-      <div>نوع وام: {loanType}</div>
-      <div>{toLocalDate(birthDate)}</div>
+    <div className={styles.tabelContainer}>
+      <Table>
+        <Table.Header>
+          <th>#</th>
+          <th>نام متقاضی</th>
+          <th>نام خانوادگی متقاضی</th>
+          <th>نوع وام</th>
+          <th>کد ملی</th>
+          <th>شماره تماس</th>
+          <th>تاریخ تولد</th>
+        </Table.Header>
+        <Table.Body>
+          {data?.map((item, index) => (
+            <Table.Row key={index}>
+              <td>{index + 1}</td>
+              <td>{item.firstName}</td>
+              <td>{item.lastName}</td>
+              <td>{item.loanType}</td>
+              <td>{item.nationalCode}</td>
+              <td>{item.phoneNumber}</td>
+              <td>{toLocalDate(item.birthDate)}</td>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
     </div>
   );
 };
