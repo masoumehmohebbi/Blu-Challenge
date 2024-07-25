@@ -21,8 +21,19 @@ const initialValues = {
   annualBalance: "",
 };
 
-const BankDataForm = ({ nextStep, prevStep, updateFormData }) => {
-  const onSubmit = (values) => {
+// define types
+interface BankDataFormProps {
+  nextStep: () => void;
+  prevStep: () => void;
+  updateFormData: (values: typeof initialValues) => void;
+}
+
+const BankDataForm = ({
+  nextStep,
+  prevStep,
+  updateFormData,
+}: BankDataFormProps) => {
+  const onSubmit = (values: typeof initialValues) => {
     updateFormData(values);
     nextStep();
   };

@@ -1,4 +1,4 @@
-import { InputProps } from "src/types/formInputs";
+import { InputProps } from "@/types/formInputs";
 import styles from "./formInput.module.css";
 
 export default function Input({

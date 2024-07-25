@@ -27,7 +27,7 @@
         }
       ],
       "amount": 2000000000,
-      "interestRate": 3.8,
+      "percentageRate": 3.8,
       "penaltyRate": 3.5
     },
     {
@@ -42,7 +42,7 @@
         }
       ],
       "amount": 4000000000,
-      "interestRate": 22,
+      "percentageRate": 22,
       "penaltyRate": 3.5
     },
     {
@@ -69,7 +69,7 @@
         }
       ],
       "amount": 1000000000,
-      "interestRate": 18,
+      "percentageRate": 18,
       "penaltyRate": 3.5
     },
     {
@@ -88,7 +88,7 @@
         }
       ],
       "amount": 2500000000,
-      "interestRate": 20,
+      "percentageRate": 20,
       "penaltyRate": 3.5
     },
     {
@@ -107,7 +107,7 @@
         }
       ],
       "amount": 1500000000,
-      "interestRate": 8,
+      "percentageRate": 8,
       "penaltyRate": 3.5
     }
   ]

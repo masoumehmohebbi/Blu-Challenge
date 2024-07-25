@@ -35,6 +35,7 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
 
   const onSubmit = (values) => {
     updateFormData(values);
+    console.log(values);
 
     // Persist data in LocalStorage
     let existingData = localStorage.getItem("user");
@@ -80,13 +81,14 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
     }
 
     //Calc Penalty
-    const { penaltyRate, amount, interestRate } = selectedLoan;
+    const { penaltyRate, amount, percentageRate } = selectedLoan;
     setCalcPenalty(penaltyRate * amount);
 
     // Calc payment
     const selectedLoanCost = parseInt(loanCost.match(/\d+/g));
+
     setCalcPayment(
-      ((amount + amount * interestRate) / selectedLoanCost).toFixed(0)
+      ((amount + amount * percentageRate) / selectedLoanCost).toFixed(0)
     );
   };
 

@@ -8,15 +8,9 @@ export interface InputProps {
   type?: string;
 }
 
-export interface SignInFormValues {
-  email: string;
-  password: string;
-}
-
-export interface SignUpFormValues {
-  email: string;
-  password: string;
+export interface SelectProps {
+  formik: any;
   name: string;
-  phoneNumber: string;
-  confirmPassword: string;
+  selectOptions: { name: string }[];
+  label: string;
 }

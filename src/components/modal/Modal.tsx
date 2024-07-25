@@ -34,6 +34,8 @@ function Modal({ onOpen, open }) {
 export default Modal;
 
 const UserLoanListsComponent = ({ data }) => {
+  console.log(data);
+
   return (
     <div className={styles.tabelContainer}>
       <Table>
