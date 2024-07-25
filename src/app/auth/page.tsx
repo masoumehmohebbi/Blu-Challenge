@@ -1,5 +1,5 @@
 "use client";
-import BankDataForm from "@/components/banckDataForm/BankDataForm";
+import BankDataForm from "@/components/bankDataForm/BankDataForm";
 import LoanTypesForm from "@/components/loanTypesForm/LoanTypesForm";
 import LogInForm from "@/components/loginForm/LogInForm";
 import React, { useState } from "react";
