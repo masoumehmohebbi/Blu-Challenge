@@ -48,6 +48,14 @@
   color: rgb(var(--color-primary-100));
 }
 
+.text {
+  color: rgb(var(--color-primary-100));
+  font-size: 18px;
+  width: 100%;
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
 @media (min-width: 768px) {
   .modal {
     max-width: 30rem;
