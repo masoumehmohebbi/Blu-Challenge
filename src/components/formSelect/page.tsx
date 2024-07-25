@@ -1,6 +1,7 @@
 import { FormValues } from "@/types/common";
 import { FormikProps } from "formik";
 import React from "react";
+import styles from "./formSelect.module.css";
 
 type SelectProps = {
   selectOptions: {
@@ -11,16 +12,14 @@ type SelectProps = {
   formik: FormikProps<FormValues>;
 };
 
-const Select = ({ formik, name, selectOptions }: SelectProps) => {
+const Select = ({ formik, name, selectOptions, label }: SelectProps) => {
   return (
     <div>
-      <select
-        {...formik.getFieldProps(name)}
-        className="w-full cursor-pointer transition bg-slate-100 duration-300 rounded-lg p-3 border focus:outline-none focus:bg-white focus:border-blue-300 hover:border-blue-300 focus:shadow-lg focus:shadow-blue-100"
-      >
-        {selectOptions.map((item) => (
-          <option key={item.value} value={item.value}>
-            {item.label}
+      <label htmlFor="name">{label}</label>
+      <select {...formik.getFieldProps(name)} className={styles.select}>
+        {selectOptions?.map((item) => (
+          <option key={item.name} value={item.name}>
+            {item.name}
           </option>
         ))}
       </select>

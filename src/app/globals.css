@@ -82,10 +82,16 @@ button:disabled {
   flex-direction: column;
   min-height: 100vh;
 }
+.flexCol {
+  display: flex;
+  flex-direction: column;
+  gay: 0.9rem 0;
+  width: 100%;
+  margin-bottom: 1.4rem;
+}
 .flexRow {
   display: flex;
-  /* justify-content: space-between; */
-  flex-direction: column;
+  justify-content: space-between;
   gay: 0.9rem 0;
   width: 100%;
   margin-bottom: 1.4rem;

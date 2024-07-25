@@ -1,3 +1,36 @@
+.iconWrapper {
+  display: flex;
+  gap: 0 0.4rem;
+  align-items: center;
+}
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.iconMoveBack {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.2rem;
+}
+.calcBtn {
+  font-size: 18px;
+  padding: 6px 18px;
+  border-radius: 10px;
+  transition-property: all;
+  transition-duration: 300ms;
+  color: rgb(var(--color-secondary-0));
+  background-color: rgb(var(--color-success));
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+.btn--primary:hover {
+  color: rgb(var(--color-secondary-0));
+  background-color: rgb(var(--color-primary-800));
+}
 .main {
   display: flex;
   gap: 1.8rem 0;
@@ -7,10 +40,7 @@
   width: 100%;
   margin: 0px auto;
 }
-.icon {
-  width: 1rem;
-  height: 1rem;
-}
+
 @media (min-width: 640px) {
   .container {
     padding: 0.75rem;

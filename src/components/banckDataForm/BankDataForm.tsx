@@ -35,7 +35,7 @@ const BankDataForm = ({ nextStep, prevStep, updateFormData }) => {
 
   return (
     <div className={styles.container}>
-      <div className="flexRow">
+      <div className="flexCol">
         <button className="btn--secondary" onClick={prevStep}>
           <ArrowRightIcon className={styles.icon} />
           <span>برگشت</span>
