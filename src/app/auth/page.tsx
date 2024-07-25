@@ -1,63 +1,37 @@
 "use client";
-import React from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import styles from "./LogInForm.module.css";
-import Input from "@/components/formInput/page";
+import BankDataForm from "@/components/banckDataForm/BankDataForm";
+import LoanTypesForm from "@/components/loanTypesForm/LoanTypesForm";
+import LogInForm from "@/components/loginForm/LogInForm";
+import React, { useState } from "react";
 
-// validation schema
-const validationSchema = Yup.object({
-  firstName: Yup.string()
-    .required("نام  را وارد کنید")
-    .min(2, "نام باید حداقل شامل 2 کاراکتر باشد"),
-  lastName: Yup.string()
-    .required("نام خانوادگی  را وارد کنید")
-    .min(4, "نام خانوادگی باید حداقل شامل 4 کاراکتر باشد"),
-  phoneNumber: Yup.string()
-    .required("شماره موبایل را وارد کنید")
-    .matches(/^[0-9]{11}$/, "شماره موبایل باید 11 رقم باشد")
-    .nullable(),
-});
+const StepForm = () => {
+  const [step, setStep] = useState(3);
+  const [formData, setFormData] = useState({});
 
-// initial values
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  nationalCode: "",
-  dateOfBirth: "",
-  phoneNumber: "",
-};
-const LoanForm = () => {
-  const onSubmit = (values) => {
-    const { email, password } = values;
-    console.log(values);
+  const nextStep = () => setStep(step + 1);
+  const prevStep = () => setStep(step - 1);
+
+  const updateFormData = (newData: any) => {
+    setFormData((prev) => ({ ...prev, ...newData }));
   };
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema,
-    validateOnMount: true,
-  });
-  return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>ثبت تسهیلات بانکی</h1>
-      <form onSubmit={formik.handleSubmit} className={styles.main}>
-        <Input name="firstName" formik={formik} label="نام" />
-        <Input name="lastName" formik={formik} label="نام خانوادگی" />
-        <Input name="nationalCode" formik={formik} label="کد ملی" />
-        <Input name="dateOfBirth" formik={formik} label="تاریخ تولد" />
-        <Input name="phoneNumber" formik={formik} label="شماره تماس" />
 
-        <button
-          type="submit"
-          disabled={!formik.isValid}
-          className={`btn--primary ${styles.btn}`}
-        >
-          ثبت
-        </button>
-      </form>
-    </div>
-  );
+  switch (step) {
+    case 1:
+      return <LogInForm nextStep={nextStep} updateFormData={updateFormData} />;
+    case 2:
+      return (
+        <BankDataForm
+          nextStep={nextStep}
+          prevStep={prevStep}
+          updateFormData={updateFormData}
+        />
+      );
+    case 3:
+      return <LoanTypesForm prevStep={prevStep} formData={formData} />;
+
+    default:
+      return null;
+  }
 };
 
-export default LoanForm;
+export default StepForm;
