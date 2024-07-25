@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/common/header/Header";
 import Footer from "@/common/footer/Footer";
 import localFont from "next/font/local";
+import { Toaster } from "react-hot-toast";
 
 const vazirsans = localFont({
   src: [
@@ -32,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body className={vazirsans.className}>
+        <Toaster />
         <div className="wrapper">
           <Header />
           {children}

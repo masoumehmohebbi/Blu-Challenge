@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Select from "../formSelect/page";
 import loans from "../../../server/data.json";
+import toast from "react-hot-toast";
 
 // validation schema
 const validationSchema = Yup.object({
@@ -24,28 +25,20 @@ const initialValues = {
 };
 
 const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
-  const [calculatedValues, setCalculatedValues] = useState({
-    penalty: 0,
-    installment: 0,
-  });
-
   const selectOptions = loans.data;
-
-  // const [selectedLoan, setSelectedLoan] = useState(loans.data[0]);
-  const [selectedRepayment, setSelectedRepayment] = useState([
-    {
-      name: selectOptions[0].repaymentType[0].name,
-      value: selectOptions[0].repaymentType[0].value,
-    },
-  ]);
+  const [selectedRepayment, setSelectedRepayment] = useState([]);
 
   const onSubmit = (values) => {
     updateFormData(values);
 
+    // Persist data in LocalStorage
     let existingData = localStorage.getItem("user");
     let dataArray = existingData ? JSON.parse(existingData) : [];
     dataArray.push(formData);
     localStorage.setItem("user", JSON.stringify(dataArray));
+
+    window.location.href = "/";
+    toast.success("تسهیلات با موفقیت ثبت شد");
   };
   const formik = useFormik({
     initialValues,
@@ -72,20 +65,6 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
       (loan) => loan.name === formik.values.loanType
     );
     if (!selectedLoan) return;
-
-    const loanAmount = formData.amount; // مقدار وام از داده‌های فرم
-    const penaltyRate = selectedLoan.penaltyRate;
-    const interestRate = selectedLoan.interestRate;
-    const repaymentMonths = formik.values.loanRepayment;
-
-    const penalty = calculatePenalty(loanAmount, penaltyRate);
-    const installment = calculateInstallment(
-      loanAmount,
-      interestRate,
-      repaymentMonths
-    );
-
-    setCalculatedValues({ penalty, installment });
   };
 
   return (
@@ -131,7 +110,7 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
               />
               <h4>جریمه دیرکرد: </h4>
             </div>
-            <span>{calculatedValues.penalty}</span>
+            <span>0</span>
           </div>
           <div className="flexRow">
             <div className={styles.iconWrapper}>
@@ -141,7 +120,7 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
               />
               <h4>قسط تسهیلات: </h4>
             </div>
-            <span>{calculatedValues.installment}</span>
+            <span>0</span>
           </div>
         </div>
         <button
@@ -157,12 +136,3 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
 };
 
 export default LoanTypesForm;
-
-const calculatePenalty = (loanAmount, penaltyRate) => {
-  return loanAmount * (penaltyRate / 100);
-};
-
-const calculateInstallment = (loanAmount, interestRate, repaymentMonths) => {
-  const totalAmount = loanAmount + loanAmount * (interestRate / 100);
-  return totalAmount / repaymentMonths;
-};

@@ -17,6 +17,9 @@ const Select = ({ formik, name, selectOptions, label }: SelectProps) => {
     <div>
       <label htmlFor="name">{label}</label>
       <select {...formik.getFieldProps(name)} className={styles.select}>
+        <option key="choose" value="">
+          انتخاب کنید...
+        </option>
         {selectOptions?.map((item) => (
           <option key={item.name} value={item.name}>
             {item.name}
