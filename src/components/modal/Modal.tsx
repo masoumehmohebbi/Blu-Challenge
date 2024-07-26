@@ -59,7 +59,9 @@ function Modal({ onOpen, open }: ModalProps) {
       <div className={styles.backdrop} onClick={() => onOpen(false)}></div>
       <div className={styles.modal}>
         <div className={styles.modal__header}>
-          <h2 className={styles.title}>لیست تسهیلات</h2>
+          <h2 title="loanLists" className={styles.title}>
+            لیست تسهیلات
+          </h2>
           <button onClick={() => onOpen(false)}>
             <XCircleIcon className={`${styles.close} ${styles.icon}`} />
           </button>
