@@ -1,12 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./header.module.css";
 import Link from "next/link";
 import Modal from "@/components/modal/Modal";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState(1);
+  const storedItem = localStorage.getItem("activeItem");
+  const [activeItem, setActiveItem] = useState<number>(
+    storedItem ? JSON.parse(storedItem) : 1
+  );
+
+  useEffect(() => {
+    const storedActiveItem = storedItem ? JSON.parse(storedItem) : 1;
+    setActiveItem(storedActiveItem);
+  }, []);
+
+  const activeItemHandler = (index: number) => {
+    setActiveItem(index);
+    localStorage.setItem("activeItem", JSON.stringify(index));
+  };
 
   return (
     <>
@@ -20,7 +33,7 @@ const Header = () => {
         <ul className={styles.menu}>
           <li>
             <Link
-              onClick={() => setActiveItem(1)}
+              onClick={() => activeItemHandler(1)}
               className={activeItem === 1 ? styles.activeItem : ""}
               href="/"
             >
@@ -33,7 +46,7 @@ const Header = () => {
               href=""
               onClick={() => {
                 setIsOpen((prev) => !prev);
-                setActiveItem(2);
+                activeItemHandler(2);
               }}
             >
               لیست تسهیلات
@@ -41,7 +54,7 @@ const Header = () => {
           </li>
           <li>
             <Link
-              onClick={() => setActiveItem(3)}
+              onClick={() => activeItemHandler(3)}
               className={activeItem === 3 ? styles.activeItem : ""}
               href="/about"
             >

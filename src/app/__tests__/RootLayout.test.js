@@ -13,4 +13,10 @@ describe("RootLayout", () => {
     const htmlTag = document.documentElement;
     expect(htmlTag).toHaveAttribute("lang", "fa");
   });
+
+  it("should have main className", () => {
+    render(<RootLayout />);
+    const mainElem = document.getElementsByTagName(main);
+    expect(mainElem).toHaveAttribute("className").toBeInTheDocument();
+  });
 });
