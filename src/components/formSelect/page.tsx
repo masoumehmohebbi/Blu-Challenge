@@ -17,7 +17,9 @@ const Select = ({ formik, name, selectOptions, label }: SelectProps) => {
         ))}
       </select>
       {formik.errors[name] && formik.touched[name] && (
-        <span style={{ color: "rgb(var(--color-red-500))" }}>
+        <span
+          style={{ color: "rgb(var(--color-red-500))", fontSize: "0.8rem" }}
+        >
           {formik.errors[name]}
         </span>
       )}

@@ -85,6 +85,8 @@ const LoanTypesForm = ({
   });
   // getting select-options data
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCalcPayment(0);
+    setCalcPenalty(0);
     if (e.target.name === "loanType") {
       const selectedLoan = selectOptions.find(
         (loan) => loan.name === e.target.value
@@ -103,6 +105,8 @@ const LoanTypesForm = ({
   };
 
   const calcHandler = () => {
+    setLoanCost(null);
+
     const selectedLoan = selectOptions.find(
       (loan) => loan.name === formik.values.loanType
     );
@@ -117,6 +121,9 @@ const LoanTypesForm = ({
 
     // Calc payment
     const selectedLoanCost = parseInt(loanCost?.match(/\d+/g)?.[0] || "0");
+    if (!selectedLoanCost) {
+      return;
+    }
     setCalcPayment(
       parseInt(
         ((amount + amount * percentageRate) / selectedLoanCost).toFixed(0)
