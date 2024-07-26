@@ -110,5 +110,24 @@
       "percentageRate": 8,
       "penaltyRate": 3.5
     }
+  ],
+  "user": [
+    {
+      "id": "3452",
+      "formData": {
+        "firstName": "معصومه",
+        "lastName": "محبی",
+        "nationalCode": "2680307143",
+        "birthDate": "2024-07-17",
+        "phoneNumber": "09394296023",
+        "accountNumber": "123",
+        "iban": "22222",
+        "annualBalance": 66666
+      },
+      "values": {
+        "loanType": "وام تحصیلی",
+        "loanRepayment": "84 ماهه"
+      }
+    }
   ]
 }

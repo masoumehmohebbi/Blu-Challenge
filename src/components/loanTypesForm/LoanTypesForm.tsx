@@ -13,6 +13,9 @@ import Select from "../formSelect/page";
 import loans from "../../../server/data.json";
 import toast from "react-hot-toast";
 import toPersianDigits from "@/utils/toPersianDigits";
+import { FormValues, LoanTypesFormProps } from "@/types/formInputs";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 // validation schema
 const validationSchema = Yup.object({
@@ -26,51 +29,74 @@ const initialValues = {
   loanRepayment: "",
 };
 
-const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
+const LoanTypesForm = ({
+  prevStep,
+  formData,
+  updateFormData,
+}: LoanTypesFormProps) => {
+  const router = useRouter();
   const selectOptions = loans.data;
-  const [selectedRepayment, setSelectedRepayment] = useState([]);
+  const [selectedRepayment, setSelectedRepayment] = useState<
+    { name: string; value: number }[]
+  >([]);
   const [calcPenalty, setCalcPenalty] = useState(0);
   const [calcPayment, setCalcPayment] = useState(0);
-  const [loanCost, setLoanCost] = useState(null);
+  const [loanCost, setLoanCost] = useState<string | null>(null);
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values: FormValues) => {
     updateFormData(values);
-    console.log(values);
 
-    // Persist data in LocalStorage
+    //! Persist data in Json-Server-DB
+    const dataToSend = {
+      formData,
+      values,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/user",
+        dataToSend
+      );
+      toast.success("تسهیلات با موفقیت ثبت شد");
+      router.push("/");
+    } catch (error) {
+      toast.error(error as string);
+    }
+    //! Secend-Way: Persist data in LocalStorage
     let existingData = localStorage.getItem("user");
     let dataArray = existingData ? JSON.parse(existingData) : [];
     dataArray.push(formData);
     localStorage.setItem("user", JSON.stringify(dataArray));
-
-    window.location.href = "/";
-    toast.success("تسهیلات با موفقیت ثبت شد");
+    // router.push("/");
+    // toast.success("تسهیلات با موفقیت ثبت شد");
   };
+
   const formik = useFormik({
     initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,
   });
-  const onChange = (e) => {
+  
+  // getting select-options data
+  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.name === "loanType") {
-      const seletedLoan = selectOptions.find(
+      const selectedLoan = selectOptions.find(
         (loan) => loan.name === e.target.value
       );
 
       setSelectedRepayment(
-        seletedLoan?.repaymentType.map((r) => {
+        selectedLoan?.repaymentType?.map((r) => {
           return { name: r.name, value: r.value };
-        })
+        }) || []
       );
     }
 
     if (e.target.name === "loanRepayment") {
-      console.log(e.target.value);
-
       setLoanCost(e.target.value);
     }
   };
+
   const calcHandler = () => {
     const selectedLoan = selectOptions.find(
       (loan) => loan.name === formik.values.loanType
@@ -85,10 +111,11 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
     setCalcPenalty(penaltyRate * amount);
 
     // Calc payment
-    const selectedLoanCost = parseInt(loanCost.match(/\d+/g));
-
+    const selectedLoanCost = parseInt(loanCost?.match(/\d+/g)?.[0] || "0");
     setCalcPayment(
-      ((amount + amount * percentageRate) / selectedLoanCost).toFixed(0)
+      parseInt(
+        ((amount + amount * percentageRate) / selectedLoanCost).toFixed(0)
+      )
     );
   };
 
@@ -106,7 +133,7 @@ const LoanTypesForm = ({ prevStep, formData, updateFormData }) => {
         onSubmit={formik.handleSubmit}
         onChange={(e) => {
           formik.handleChange(e);
-          onChange(e);
+          onChange(e as any);
         }}
       >
         <Select

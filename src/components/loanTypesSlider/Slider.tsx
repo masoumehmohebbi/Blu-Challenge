@@ -27,7 +27,6 @@ const Slider = () => {
         speed={1500}
         slidesPerView={1}
         spaceBetween={30}
-        // loop={true}
         pagination={{
           clickable: true,
         }}
