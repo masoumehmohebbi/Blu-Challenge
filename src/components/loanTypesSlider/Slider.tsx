@@ -7,20 +7,35 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-
 import "./styles.css";
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import Loading from "@/common/Loading";
 
 const Slider = () => {
-  const [loanData, setLoanData] = useState(null);
+  const [loanData, setLoanData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/data")
-      .then(({ data }) => setLoanData(data))
-      .catch((err) => console.log(err));
+    const fetchData = async () => {
+      try {
+        // setLoading(false);
+        const { data } = await axios.get("http://localhost:5000/data");
+        setLoanData(data);
+      } catch (error) {
+        console.error("Error fetching loan data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
+  if (loading)
+    return (
+      <div className="modal__wrapper">
+        <Loading />
+      </div>
+    );
   return (
     <div className="mb-6">
       <Swiper

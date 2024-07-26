@@ -8,7 +8,10 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 // validation schema
 const validationSchema = yup.object({
   accountNumber: yup.string().required("شماره حساب الزامی است"),
-  iban: yup.string().required("شماره شبا الزامی است"),
+  iban: yup
+    .string()
+    .required("شماره شبا الزامی است")
+    .min(24, "شماره شبا باید 24 رقمی باشد"),
   annualBalance: yup
     .number()
     .required("میانگین ریالی موجودی سالیانه الزامی است"),

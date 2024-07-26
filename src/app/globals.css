@@ -141,8 +141,8 @@ input[type="number"] {
   color: rgb(var(--color-secondary-0));
   background-color: rgb(var(--color-secondary-600));
 }
-/* TABLE */
 
+/* TABLE */
 table {
   border-collapse: collapse;
   border-spacing: 0;
