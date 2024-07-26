@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import styles from "./LogInForm.module.css";
 import Input from "@/components/formInput/page";
+import { FormValues, LogInFormProps } from "@/types/formInputs";
 
 // validation schema
 const validationSchema = Yup.object({
@@ -31,8 +32,9 @@ const initialValues = {
   birthDate: "",
   phoneNumber: "",
 };
-const LogInForm = ({ nextStep, updateFormData }) => {
-  const onSubmit = (values) => {
+
+const LogInForm = ({ nextStep, updateFormData }: LogInFormProps) => {
+  const onSubmit = (values: FormValues) => {
     updateFormData(values);
     nextStep();
   };

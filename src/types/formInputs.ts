@@ -14,17 +14,28 @@ export interface SelectProps {
   selectOptions: { name: string }[];
   label: string;
 }
-export interface FormValues {
-  loanType: string;
-  loanRepayment: string;
-}
-
 export interface SelectOption {
   name: string;
   value: string;
 }
-export interface LoanTypesFormProps {
-  prevStep: () => void;
-  formData: FormValues;
+export interface FormValues {
+  firstName?: string;
+  lastName?: string;
+  nationalCode?: string;
+  birthDate?: string;
+  phoneNumber?: string;
+  loanType?: string;
+  accountNumber?: string;
+  iban?: string;
+  annualBalance?: string;
+  loanRepayment?: string;
+}
+export interface LoanTypesFormValues {
+  loanType: string;
+  loanRepayment: string;
+}
+
+export interface LogInFormProps {
+  nextStep: () => void;
   updateFormData: (values: FormValues) => void;
 }

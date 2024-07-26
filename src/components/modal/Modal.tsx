@@ -6,10 +6,29 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Loading from "@/common/Loading";
+// types
+interface UserFormData {
+  firstName: string;
+  lastName: string;
+  nationalCode: string;
+  phoneNumber: string;
+  birthDate: string; // Adjust if you have a different format
+}
 
-function Modal({ onOpen, open }) {
+interface UserLoan {
+  formData: UserFormData;
+  values: {
+    loanType: string;
+  };
+}
+interface ModalProps {
+  onOpen: (open: boolean) => void;
+  open: boolean;
+}
+
+function Modal({ onOpen, open }: ModalProps) {
   // ! get user information from Json-server DB
-  const [userLoanLists, setUserLoanLists] = useState([]);
+  const [userLoanLists, setUserLoanLists] = useState<UserLoan[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -58,8 +77,10 @@ function Modal({ onOpen, open }) {
 }
 
 export default Modal;
-
-const UserLoanListsComponent = ({ data }) => {
+interface UserLoanListsComponentProps {
+  data: UserLoan[];
+}
+const UserLoanListsComponent = ({ data }: UserLoanListsComponentProps) => {
   console.log(data);
 
   return (

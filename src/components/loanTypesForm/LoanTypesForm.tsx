@@ -13,7 +13,7 @@ import Select from "../formSelect/page";
 import loans from "../../../server/data.json";
 import toast from "react-hot-toast";
 import toPersianDigits from "@/utils/toPersianDigits";
-import { FormValues, LoanTypesFormProps } from "@/types/formInputs";
+import { FormValues, LoanTypesFormValues } from "@/types/formInputs";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
@@ -24,11 +24,17 @@ const validationSchema = Yup.object({
 });
 
 // initial values
-const initialValues = {
+const initialValues: LoanTypesFormValues = {
   loanType: "",
   loanRepayment: "",
 };
 
+// define types
+interface LoanTypesFormProps {
+  prevStep: () => void;
+  formData: FormValues;
+  updateFormData: (values: Partial<FormValues>) => void;
+}
 const LoanTypesForm = ({
   prevStep,
   formData,
@@ -77,7 +83,6 @@ const LoanTypesForm = ({
     validationSchema,
     validateOnMount: true,
   });
-  
   // getting select-options data
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.name === "loanType") {

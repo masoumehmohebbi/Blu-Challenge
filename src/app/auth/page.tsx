@@ -2,6 +2,7 @@
 import BankDataForm from "@/components/bankDataForm/BankDataForm";
 import LoanTypesForm from "@/components/loanTypesForm/LoanTypesForm";
 import LogInForm from "@/components/loginForm/LogInForm";
+import { FormValues } from "@/types/formInputs";
 import React, { useState } from "react";
 
 const StepForm = () => {
@@ -12,7 +13,7 @@ const StepForm = () => {
   const prevStep = () => setStep(step - 1);
 
   // Persisting data
-  const updateFormData = (newData: any) => {
+  const updateFormData = (newData: Partial<FormValues>) => {
     setFormData((prev) => ({ ...prev, ...newData }));
   };
 

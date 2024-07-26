@@ -12,8 +12,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Loading from "@/common/Loading";
 
+// Define types
+interface RepaymentType {
+  name: string;
+}
+interface LoanItem {
+  id: string;
+  cover: string;
+  name: string;
+  amount: string;
+  repaymentType: RepaymentType[];
+  interestRate: string;
+  penaltyRate: string;
+}
 const Slider = () => {
-  const [loanData, setLoanData] = useState([]);
+  const [loanData, setLoanData] = useState<LoanItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
