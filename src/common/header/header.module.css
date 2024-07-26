@@ -41,6 +41,14 @@
     height: 105px;
   }
 }
+
+.activeItem {
+  border-bottom: 2px solid rgb(var(--color-primary-500));
+  color: rgb(var(--color-primary-800));
+  font-weight: 600;
+  transition: all 0.5s leaner;
+}
+
 @media (min-width: 768px) {
   .menu,
   .header button {
