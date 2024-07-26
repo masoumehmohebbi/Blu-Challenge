@@ -14,9 +14,11 @@ describe("RootLayout", () => {
     expect(htmlTag).toHaveAttribute("lang", "fa");
   });
 
-  it("should have main className", () => {
+  it("renders Slider component inside a main element with the correct class", () => {
     render(<RootLayout />);
-    const mainElem = document.getElementsByTagName(main);
-    expect(mainElem).toHaveAttribute("className").toBeInTheDocument();
+    const slider = screen.getByRole("presentation", { name: /slider/i });
+    expect(slider).toBeInTheDocument();
+    const mainElement = screen.getByRole("main");
+    expect(mainElement).toHaveClass("main");
   });
 });
