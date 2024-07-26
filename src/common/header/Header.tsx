@@ -25,7 +25,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link href="">درباره ما</Link>
+            <Link href="/about">درباره ما</Link>
           </li>
         </ul>
         {/* menu logo */}
