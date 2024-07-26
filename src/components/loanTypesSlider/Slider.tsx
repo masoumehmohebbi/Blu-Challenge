@@ -19,7 +19,7 @@ const Slider = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // setLoading(false);
+        setLoading(false);
         const { data } = await axios.get("http://localhost:5000/data");
         setLoanData(data);
       } catch (error) {

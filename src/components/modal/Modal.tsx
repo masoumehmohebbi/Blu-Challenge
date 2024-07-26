@@ -2,12 +2,37 @@ import { XCircleIcon } from "@heroicons/react/24/outline";
 import styles from "./modal.module.css";
 import Table from "../tabel/Tabel";
 import toLocalDate from "@/utils/toLocalDate";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import Loading from "@/common/Loading";
 
 function Modal({ onOpen, open }) {
-  let userLoanLists = null;
-  if (typeof window !== "undefined") {
-    userLoanLists = JSON.parse(localStorage.getItem("user"));
-  }
+  // ! get user information from Json-server DB
+  const [userLoanLists, setUserLoanLists] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const fetchUserLoanLists = async () => {
+      try {
+        setLoading(false);
+        const { data } = await axios.get("http://localhost:5000/user");
+        setUserLoanLists(data);
+      } catch (err) {
+        toast.error(err as string);
+      }
+    };
+
+    fetchUserLoanLists();
+  }, [open]);
+
+  // ! Second Way get user information from localStorage
+  // let userLocalStorageLoanLists = null;
+  // if (typeof window !== "undefined") {
+  //   userLocalStorageLoanLists = JSON.parse(localStorage.getItem("user"));
+  // }
 
   if (!open) return null;
   return (
@@ -20,12 +45,13 @@ function Modal({ onOpen, open }) {
             <XCircleIcon className={`${styles.close} ${styles.icon}`} />
           </button>
         </div>
-        {!userLoanLists ? (
+        {loading ? (
+          <Loading />
+        ) : !userLoanLists?.length ? (
           <div className={styles.text}>هنوز هیج تسهیلاتی ثبت نکردید.</div>
         ) : (
           <UserLoanListsComponent data={userLoanLists} />
         )}
-        {/* {userLoanLists && <p>yes</p>} */}
       </div>
     </div>
   );
@@ -42,7 +68,7 @@ const UserLoanListsComponent = ({ data }) => {
         <Table.Header>
           <th>#</th>
           <th>نام متقاضی</th>
-          <th>نام خانوادگی متقاضی</th>
+          <th>نام خانوادگی </th>
           <th>نوع وام</th>
           <th>کد ملی</th>
           <th>شماره تماس</th>
@@ -52,12 +78,12 @@ const UserLoanListsComponent = ({ data }) => {
           {data?.map((item, index) => (
             <Table.Row key={index}>
               <td>{index + 1}</td>
-              <td>{item.firstName}</td>
-              <td>{item.lastName}</td>
-              <td>{item.loanType}</td>
-              <td>{item.nationalCode}</td>
-              <td>{item.phoneNumber}</td>
-              <td>{toLocalDate(item.birthDate)}</td>
+              <td>{item.formData.firstName}</td>
+              <td>{item.formData.lastName}</td>
+              <td>{item.values.loanType}</td>
+              <td>{item.formData.nationalCode}</td>
+              <td>{item.formData.phoneNumber}</td>
+              <td>{toLocalDate(item.formData.birthDate)}</td>
             </Table.Row>
           ))}
         </Table.Body>
