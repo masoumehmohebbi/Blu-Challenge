@@ -11,13 +11,14 @@ const Header = () => {
     <>
       <div className={`container ${styles.header}`}>
         <Link href="/auth" className="btn--primary">
-          ورود به سامانه
+          ورود&nbsp;
+          <span className={styles.loginLink}> به سامانه </span>
         </Link>
 
         {/* menu items */}
         <ul className={styles.menu}>
           <li>
-            <Link href="/">صفحه اصلی</Link>
+            <Link href="/">خانه</Link>
           </li>
           <li>
             <Link href="" onClick={() => setIsOpen((prev) => !prev)}>
@@ -29,8 +30,8 @@ const Header = () => {
           </li>
         </ul>
         {/* menu logo */}
-        <div>
-          <Image src="/blu.svg" width={120} height={120} alt="blue-logo" />
+        <div className={styles.logo__wrapper}>
+          <img src="/blu.svg" alt="blu-logo" />
         </div>
       </div>
       <Modal open={isOpen} onOpen={setIsOpen} />

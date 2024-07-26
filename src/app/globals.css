@@ -117,7 +117,7 @@ input[type="number"] {
 .btn--primary,
 .btn--secondary {
   font-size: 18px;
-  padding: 6px 18px;
+  padding: 3px 9px;
   border-radius: 20px;
   transition-property: all;
   transition-duration: 300ms;
@@ -128,6 +128,10 @@ input[type="number"] {
   outline-offset: 2px;
   border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
 }
 .btn--primary:hover {
   color: rgb(var(--color-secondary-0));
@@ -140,6 +144,12 @@ input[type="number"] {
 .btn--secondary:hover {
   color: rgb(var(--color-secondary-0));
   background-color: rgb(var(--color-secondary-600));
+}
+@media (min-width: 640px) {
+  .btn--primary,
+  .btn--secondary {
+    padding: 6px 18px;
+  }
 }
 
 /* TABLE */

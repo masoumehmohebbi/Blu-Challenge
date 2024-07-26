@@ -31,11 +31,12 @@
   object-fit: cover;
 }
 .swiper {
-  width: 70%;
+  width: 90%;
   height: 100%;
   margin-left: auto;
   margin-right: auto;
   border-radius: 16px !important;
+  padding-bottom: 2.5rem;
 }
 .swiper-pagination-bullet {
   border: 2px solid rgb(var(--color-primary-800)) !important;
@@ -43,6 +44,7 @@
   background-color: transparent !important;
   width: 10px !important;
   height: 10px !important;
+  display: none !important;
 }
 .swiper-pagination-bullet-active {
   width: 17px !important;
@@ -96,5 +98,12 @@
   }
   .sliderWrapper div {
     grid-column: span 1 / span 1;
+  }
+  .swiper-pagination-bullet {
+    display: inline-block !important;
+  }
+  .swiper {
+    width: 70%;
+    padding-bottom: 0rem;
   }
 }

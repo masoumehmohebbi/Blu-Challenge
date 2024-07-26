@@ -6,6 +6,7 @@
 .container {
   width: 100%;
   margin: 0px auto;
+  padding: 1.5rem;
 }
 .title {
   padding-top: 0.75rem;
@@ -27,5 +28,8 @@
   }
   .title {
     font-size: 1.8rem;
+  }
+  .container {
+    padding: 0rem;
   }
 }
