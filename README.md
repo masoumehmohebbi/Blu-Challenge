@@ -33,7 +33,13 @@ git clone https://github.com/masoumehmohebbi/Blu-Challenge
 npm i
 ```
 
-<p>3. Finally, run the <code>dev</code> script to start the dev server:</p>
+<p>3. Run the <code>server</code> script to start the Json-db:</p>
+
+```
+npm run dev
+```
+
+<p>4. Finally, run the <code>dev</code> script to start the dev server:</p>
 
 ```
 npm run dev
